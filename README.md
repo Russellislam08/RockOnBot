@@ -11,6 +11,7 @@ Before you can use the bot, you must make a reddit account or use an existing on
 For the bot to function, there must be a praw.ini file in the same directory as the script itself. Within the .ini file, you must put in the credentials of the app. It should be initialized like this:
 
 [BotName]
+
 client_id = Your Client ID
 
 client_secret = Your Client Secret
