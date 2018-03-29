@@ -29,15 +29,15 @@ else:
 
 subreddit = reddit.subreddit("uwaterloo")
 
-while True:                                                                 #Infinite while loop
-    for submission in subreddit.new(limit=3):                               #Limit is 3, to prevent itself from being redundant. Can be changed
-        if submission.id not in posts_replied_to:                           #Compares submission ID with all the IDs in the list, if it's not within the list, it will be assessed
-            if re.search("to the", submission.title, re.M.IGNORECASE):      #re.M.IGNORECASE means to always parse text from the start of title, while ignoring case
-                submission.reply("Rock on my dude!")                            #This is so that if any post has "To the" in other parts of the title, those will be ignored
-                print ("Replied to post: " + submission.id)                 #Prints to console, for user
-                posts_replied_to.append(submission.id)                      #Appends submission ID to list
+while True:                                                                                                                           #Infinite while loop
+    for submission in subreddit.new(limit=3):                                                                                         #Limit is 3, to prevent itself from being redundant. Can be changed
+        if submission.id not in posts_replied_to:                                                                                     #Compares submission ID with all the IDs in the list, if it's not within the list, it will be assessed
+            if re.search("to the", submission.title, re.M.IGNORECASE) or re.search("to my", submission.title, re.M.IGNORECASE):       #re.M.IGNORECASE means to always parse text from the start of title, while ignoring case
+                submission.reply("Rock on my dude!")                                                                                  #This is so that if any post has "To the" in other parts of the title, those will be ignored
+                print ("Replied to post: " + submission.id)                                                                           #Prints to console, for user
+                posts_replied_to.append(submission.id)                                                                                #Appends submission ID to list
                 with open("posts_replied_to.txt", "a") as F:
-                    F.write(submission.id + "\n")                           #Writes the submission ID to the text file to create an external database of all posts replied to
+                    F.write(submission.id + "\n")                                                                                     #Writes the submission ID to the text file to create an external database of all posts replied to
 
         elif submission.id in posts_replied_to:
             print ("Already to replied to post: " + submission.id)          #If the post was already replied to, prints to console for user as well
